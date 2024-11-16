@@ -36,7 +36,7 @@ pipeline {
         '''
         // Install JDK in Alpine (since Node.js image doesn't include Java)
         sh '''
-          apk add --no-cache openjdk11
+          sudo apk add --no-cache openjdk11
           javac HelloWorld.java
           java HelloWorld
         '''
