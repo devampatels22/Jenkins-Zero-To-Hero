@@ -23,7 +23,10 @@ pipeline {
     }
     stage('Front-end') {
       agent {
-        docker { image 'node:16-alpine' }
+        docker {
+          image 'node:16-alpine'
+          args '--user root'
+        }
       }
       steps {
         // Write the Java program to a file
@@ -36,7 +39,7 @@ pipeline {
         '''
         // Install JDK in Alpine (since Node.js image doesn't include Java)
         sh '''
-          sudo apk add --no-cache openjdk11
+          apk add --no-cache openjdk11
           javac HelloWorld.java
           java HelloWorld
         '''
